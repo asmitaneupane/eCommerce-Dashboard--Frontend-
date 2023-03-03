@@ -11,7 +11,11 @@ const Products = ({
     }, [])
 
     const getProducts = async () => {
-        let result = await fetch("http://localhost:5001/products");
+        let result = await fetch("http://localhost:5001/products", {
+            headers: {
+                authorization: `bearer ${JSON.parse(localStorage.getItem('token'))}`
+            }
+        });
         result = await result.json();
         setProducts(result);
     }
@@ -19,7 +23,10 @@ const Products = ({
 
     const deleteProduct = async (id) => {
         let result = await fetch(`http://localhost:5001/product/${id}`, {
-            method: 'Delete'
+            method: 'Delete',
+            headers: {
+                authorization: `bearer ${JSON.parse(localStorage.getItem('token'))}`
+            }
         });
         result = await result.json();
         if (result) {
@@ -29,10 +36,18 @@ const Products = ({
 
     const searchHandle = async (e) => {
         let key = e.target.value;
-        let result = await fetch(`http://localhost:5001/search/${key}`);
-        result = result.json();
-        if (result) {
-            setProducts(result);
+        if (key) {
+            let result = await fetch(`http://localhost:5001/search/${key}`, {
+                headers: {
+                    authorization: `bearer ${JSON.parse(localStorage.getItem('token'))}`
+                }
+            });
+            result = await result.json();
+            if (result) {
+                setProducts(result);
+            }
+        } else {
+            getProducts();
         }
     }
 
@@ -48,7 +63,7 @@ const Products = ({
                 <li>Company</li>
                 <li>Operation</li>
             </ul>
-            {products && products.map((item, index) =>
+            {products.length > 0 ? products.map((item, index) =>
                 <ul className="product-table" key={item.name}>
                     <li>{index + 1}</li>
                     <li>{item.name}</li>
@@ -70,6 +85,8 @@ const Products = ({
                         </Link>
                     </li>
                 </ul>
+            ) : (
+                <h1 className="warning-message">No Results Found!</h1>
             )}
         </div>
     )
