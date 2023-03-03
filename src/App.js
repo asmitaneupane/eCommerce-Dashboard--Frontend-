@@ -18,6 +18,14 @@ function App() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const [price, setPrice] = useState("");
+  const [category, setCategory] = useState("");
+  const [company, setCompany] = useState("");
+
+  const [error, setError] = useState(false);
+
+  const [products, setProducts] = useState([]);
+
   return (
     <div className="App">
       <Router>
@@ -25,9 +33,34 @@ function App() {
         <Routes>
 
           <Route element={<PrivateComponent />} >
-            <Route path='/' element={<Products />} />
-            <Route path='/add' element={<AddProducts />} />
-            <Route path='/update' element={<UpdateProducts />} />
+            <Route path='/' element={<Products
+              products={products}
+              setProducts={setProducts}
+            />} />
+            <Route path='/add' element={<AddProducts
+              name={name}
+              setName={setName}
+              price={price}
+              setPrice={setPrice}
+              category={category}
+              setCategory={setCategory}
+              company={company}
+              setCompany={setCompany}
+              error={error}
+              setError={setError}
+            />} />
+            <Route path='/update/:id' element={<UpdateProducts
+              name={name}
+              setName={setName}
+              price={price}
+              setPrice={setPrice}
+              category={category}
+              setCategory={setCategory}
+              company={company}
+              setCompany={setCompany}
+              error={error}
+              setError={setError}
+            />} />
             <Route path='/logout' element={<Logout />} />
             <Route path='/profile' element={<Profile />} />
           </Route>

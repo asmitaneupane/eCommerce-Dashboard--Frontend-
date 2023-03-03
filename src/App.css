@@ -18,7 +18,6 @@ h1 {
 
 .nav-wrapper {
   background: skyblue;
-  margin: 10px 0;
 }
 
 .nav-wrapper li {
@@ -78,4 +77,49 @@ input {
 
 .btn:hover {
   color: #fff;
+}
+
+.btn-warning {
+  background-color: #d9534f;
+  border: 1px solid #d43f3a;
+  color: #fff;
+}
+
+.btn-warning:hover {
+  background-color: #c9302c;
+  border-color: #ac2925;
+}
+
+.btn-info {
+  background-color: #5bc0de;
+  border-color: #46b8da;
+  color: #fff;
+}
+
+.btn-info:hover {
+  background-color: #31b0d5;
+  border-color: #269abc;
+}
+
+.error-message {
+  color: red;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.product-table {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+}
+
+.product-table li {
+  border: 1px solid #cecece;
+  padding: 20px;
+  text-align: center;
+}
+
+.flex-item {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
